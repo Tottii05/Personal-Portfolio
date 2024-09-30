@@ -1,2 +1,2 @@
-# Este es mi portfolio personal
-Aquí arriba está el diseño de la página web con mi portfolio
+# This is my personal portfolio code
+Check up for the HTML, CSS and JS code above
