@@ -10,6 +10,7 @@ body {
     background-color: #f6f7fb;
     font-family: 'Poppins', sans-serif;
     color: #202225;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 nav {
@@ -22,6 +23,7 @@ nav {
     position: sticky;
     top: 0;
     z-index: 999;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 nav ul {
@@ -41,6 +43,12 @@ nav ul li a:hover {
     color: #5e3bee;
 }
 
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 nav button {
     background-color: #5e3bee;
     border: none;
@@ -57,22 +65,70 @@ nav button:hover {
 }
 
 #menuButton {
-    display: none; /* ocultamos menú hamburguesa para desktop */
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #5e3bee;
+    cursor: pointer;
+}
+
+#menuButton:hover {
+    color: #4830c9;
+}
+
+#themeToggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #5e3bee;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+#themeToggle:hover {
+    background-color: rgba(94, 59, 238, 0.1);
 }
 
 /* --------- Main Section --------- */
 
 .main {
     display: flex;
+    flex-wrap: wrap;
     padding: 100px 60px;
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
     gap: 40px;
+    transition: background-color 0.3s;
 }
 
 .main .left {
+    flex: 1 1 400px;
     max-width: 600px;
+}
+
+.main .right {
+    flex: 1 1 300px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.main .right img {
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .main h5 {
@@ -113,17 +169,13 @@ nav button:hover {
     background-color: #4830c9;
 }
 
-.main .right img {
-    max-width: 100%;
-    border-radius: 20px;
-}
-
 /* --------- Skills Section --------- */
 
 .skills {
     background-color: #fefefe;
     padding: 80px 60px;
     text-align: center;
+    transition: background-color 0.3s;
 }
 
 .skills h3 {
@@ -136,16 +188,19 @@ nav button:hover {
     display: flex;
     gap: 25px;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    overflow-x: auto;
 }
 
 .skill-items .item {
     background-color: white;
     padding: 25px 30px;
     border-radius: 15px;
-    width: 270px;
+    width: 220px;
     box-shadow: 0 5px 32px rgb(0 0 0 / 0.15);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s;
+    flex-shrink: 0;
 }
 
 .skill-items .item:hover {
@@ -175,6 +230,7 @@ nav button:hover {
     padding: 80px 60px;
     gap: 40px;
     background-color: white;
+    transition: background-color 0.3s;
 }
 
 .about .left img {
@@ -204,6 +260,7 @@ nav button:hover {
 .portfolio {
     padding: 70px 20px;
     background-color: #f6f7fb;
+    transition: background-color 0.3s;
 }
 
 .portfolio .header {
@@ -239,7 +296,6 @@ nav button:hover {
     background-color: #4830c9;
 }
 
-/* Nuevo contenedor envolvente */
 .carousel-wrapper {
     position: relative;
     display: flex;
@@ -248,14 +304,12 @@ nav button:hover {
     padding: 30px 0;
 }
 
-/* ¡IMPORTANTE: se elimina overflow: hidden de aquí! */
 .portfo-items {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     height: 620px;
-    /* overflow: hidden; ← ELIMINADO */
 }
 
 .portfo-items .item {
@@ -345,7 +399,6 @@ nav button:hover {
     gap: 6px;
 }
 
-/* Botones de navegación flotantes */
 .nav-btn {
     position: absolute;
     top: 50%;
@@ -378,8 +431,6 @@ nav button:hover {
     right: 20px; 
 }
 
-/* --------- Responsive para carrusel 500x500 --------- */
-
 @media (max-width: 1100px) {
     .portfo-items .item {
         width: 420px;
@@ -400,21 +451,76 @@ nav button:hover {
 }
 
 @media (max-width: 900px) {
-    .portfo-items .item {
-        width: 360px;
-        height: 360px;
+    .main, .about {
+        flex-direction: column;
+        padding: 60px 30px;
     }
-    .portfo-items .item img {
-        height: 215px;
+    
+    nav ul {
+        display: none;
     }
-    .portfo-items .item.prev {
-        transform: translateX(-240px) scale(0.82) translateY(18px);
+    
+    #menuButton {
+        display: block;
     }
-    .portfo-items .item.next {
-        transform: translateX(240px) scale(0.82) translateY(18px);
+
+    nav.open ul {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        padding: 20px 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
     }
-    .portfo-items {
-        height: 480px;
+
+    nav.open ul li {
+        margin: 10px 0;
+    }
+
+    nav.open ul li a {
+        display: block;
+        padding: 8px 40px;
+        color: #202225;
+        text-align: center;
+    }
+
+    .skill-items {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column-reverse;
+        padding: 60px 20px;
+        text-align: center;
+    }
+
+    .main .left, 
+    .main .right {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .main .right img {
+        width: 70%;
+        max-width: 250px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .main h3 {
+        font-size: 32px;
+    }
+
+    .main p {
+        font-size: 16px;
     }
 }
 
@@ -440,7 +546,6 @@ nav button:hover {
         text-align: center;
     }
 
-    /* Ajuste clave: mover botones DENTRO de la pantalla en móviles */
     .prev-btn {
         left: 10px;
     }
@@ -455,6 +560,7 @@ footer {
     background-color: #fff;
     padding: 40px 60px;
     text-align: center;
+    transition: background-color 0.3s;
 }
 
 footer .top {
@@ -501,32 +607,85 @@ footer .bottom p {
     color: #777;
 }
 
-/* --------- Responsive --------- */
+/* --------- Modo Oscuro --------- */
 
-@media (max-width: 900px) {
-    .main, .about {
-        flex-direction: column;
-        padding: 60px 30px;
-    }
-    
-    nav ul {
-        display: none;
-    }
-    
-    #menuButton {
-        display: block;
-    }
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
 
-    .skill-items {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .portfolio .portfo-items {
-        gap: 15px;
-    }
-    
-    .portfolio .portfo-items .item {
-        min-width: 220px;
-    }
+body.dark-mode nav {
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode nav ul li a {
+    color: #e0e0e0;
+}
+
+body.dark-mode .main,
+body.dark-mode .about,
+body.dark-mode footer {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode .skills {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .skill-items .item,
+body.dark-mode .portfo-items .item {
+    background-color: #252525;
+    color: #e0e0e0;
+}
+
+body.dark-mode .portfo-items .item.active {
+    border-color: #5e3bee;
+}
+
+body.dark-mode .main p,
+body.dark-mode .about .right p,
+body.dark-mode .skill-items .item p,
+body.dark-mode .portfo-items .item p {
+    color: #b0b0b0;
+}
+
+body.dark-mode footer .bottom p {
+    color: #aaa;
+}
+
+body.dark-mode #themeToggle {
+    color: #5e3bee;
+}
+
+body.dark-mode #menuButton {
+    color: #5e3bee;
+}
+
+/* --------- Modo Oscuro - Carrusel de Proyectos --------- */
+
+body.dark-mode .portfo-items .item .info {
+    background-color: #333;
+    color: #e0e0e0;
+    border-radius: 0 0 18px 18px;
+}
+
+body.dark-mode .portfo-items .item h4 {
+    color: #ffffff;
+}
+
+body.dark-mode .portfo-items .item a {
+    color: #7c4dff;
+}
+
+body.dark-mode .portfo-items .item a:hover {
+    color: #9d6aff;
+}
+
+body.dark-mode .portfo-items .item.active {
+    box-shadow: 0 18px 50px rgba(94, 59, 238, 0.3);
+}
+
+body.dark-mode .portfolio {
+    background-color: #1a1a1a;
 }
