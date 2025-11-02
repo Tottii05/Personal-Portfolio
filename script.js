@@ -83,3 +83,10 @@ themeToggle.addEventListener('click', () => {
         localStorage.setItem('theme', 'light');
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const skillItems = document.querySelector('.skill-items');
+    if (window.innerWidth <= 900 && skillItems) {
+        skillItems.scrollLeft = 0;
+    }
+});

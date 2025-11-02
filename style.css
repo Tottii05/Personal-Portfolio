@@ -13,6 +13,8 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+/* --------- Navegación --------- */
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -173,7 +175,7 @@ nav button:hover {
 
 .skills {
     background-color: #fefefe;
-    padding: 80px 60px;
+    padding: 80px 20px;
     text-align: center;
     transition: background-color 0.3s;
 }
@@ -185,22 +187,29 @@ nav button:hover {
 }
 
 .skill-items {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 25px;
-    justify-content: center;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    overflow-x: auto;
+    justify-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
 .skill-items .item {
     background-color: white;
-    padding: 25px 30px;
+    padding: 25px 20px;
     border-radius: 15px;
-    width: 220px;
+    width: 100%;
+    max-width: 280px;
     box-shadow: 0 5px 32px rgb(0 0 0 / 0.15);
     transition: transform 0.3s ease, background-color 0.3s;
-    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 380px;
+    justify-content: space-between;
 }
 
 .skill-items .item:hover {
@@ -221,6 +230,10 @@ nav button:hover {
 .skill-items .item p {
     font-size: 15px;
     color: #4b4b4b;
+    padding: 0 10px;
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-start;
 }
 
 /* --------- About Section --------- */
@@ -255,7 +268,7 @@ nav button:hover {
     color: #4b4b4b;
 }
 
-/* --------- Portfolio Section - Carrusel (500x500) --------- */
+/* --------- Portfolio Section --------- */
 
 .portfolio {
     padding: 70px 20px;
@@ -450,80 +463,6 @@ nav button:hover {
     }
 }
 
-@media (max-width: 900px) {
-    .main, .about {
-        flex-direction: column;
-        padding: 60px 30px;
-    }
-    
-    nav ul {
-        display: none;
-    }
-    
-    #menuButton {
-        display: block;
-    }
-
-    nav.open ul {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: white;
-        padding: 20px 0;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        z-index: 1000;
-    }
-
-    nav.open ul li {
-        margin: 10px 0;
-    }
-
-    nav.open ul li a {
-        display: block;
-        padding: 8px 40px;
-        color: #202225;
-        text-align: center;
-    }
-
-    .skill-items {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 768px) {
-    .main {
-        flex-direction: column-reverse;
-        padding: 60px 20px;
-        text-align: center;
-    }
-
-    .main .left, 
-    .main .right {
-        flex: 1 1 100%;
-        max-width: 100%;
-    }
-
-    .main .right img {
-        width: 70%;
-        max-width: 250px;
-        aspect-ratio: 1 / 1;
-        object-fit: cover;
-        object-position: center;
-    }
-
-    .main h3 {
-        font-size: 32px;
-    }
-
-    .main p {
-        font-size: 16px;
-    }
-}
-
 @media (max-width: 650px) {
     .portfo-items .item {
         width: 300px;
@@ -607,6 +546,77 @@ footer .bottom p {
     color: #777;
 }
 
+/* --------- Responsive Común --------- */
+
+@media (max-width: 900px) {
+    .main, .about {
+        flex-direction: column;
+        padding: 60px 30px;
+    }
+    
+    nav ul {
+        display: none;
+    }
+    
+    #menuButton {
+        display: block;
+    }
+
+    nav.open ul {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        padding: 20px 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+
+    nav.open ul li {
+        margin: 10px 0;
+    }
+
+    nav.open ul li a {
+        display: block;
+        padding: 8px 40px;
+        color: #202225;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column-reverse;
+        padding: 60px 20px;
+        text-align: center;
+    }
+
+    .main .left, 
+    .main .right {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .main .right img {
+        width: 70%;
+        max-width: 250px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .main h3 {
+        font-size: 32px;
+    }
+
+    .main p {
+        font-size: 16px;
+    }
+}
+
 /* --------- Modo Oscuro --------- */
 
 body.dark-mode {
@@ -662,7 +672,14 @@ body.dark-mode #menuButton {
     color: #5e3bee;
 }
 
-/* --------- Modo Oscuro - Carrusel de Proyectos --------- */
+body.dark-mode nav.open ul {
+    background-color: #252525 !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode nav.open ul li a {
+    color: #e0e0e0 !important;
+}
 
 body.dark-mode .portfo-items .item .info {
     background-color: #333;
@@ -680,10 +697,6 @@ body.dark-mode .portfo-items .item a {
 
 body.dark-mode .portfo-items .item a:hover {
     color: #9d6aff;
-}
-
-body.dark-mode .portfo-items .item.active {
-    box-shadow: 0 18px 50px rgba(94, 59, 238, 0.3);
 }
 
 body.dark-mode .portfolio {
